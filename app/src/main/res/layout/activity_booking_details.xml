@@ -4,6 +4,232 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adapters.BookingDetailsActivity">
+    tools:context=".BookingDetailsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbDetails"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/rich_black">
+
+        <TextView
+            android:id="@+id/tbBookingDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/booking_details"
+            android:textColor="@color/rich_black"
+            android:textSize="30sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivDetailsUserImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/barber_photo"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbDetails"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.RoundImageView"
+        tools:ignore="ImageContrastCheck"
+        tools:src="@tools:sample/avatars" />
+
+    <ProgressBar
+        android:id="@+id/pbDetailsUserImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDetailsUserImage"
+        app:layout_constraintEnd_toEndOf="@+id/ivDetailsUserImage"
+        app:layout_constraintStart_toStartOf="@+id/ivDetailsUserImage"
+        app:layout_constraintTop_toTopOf="@+id/ivDetailsUserImage"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvDetailsUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/user_name"
+        android:textColor="@color/salmon_pink"
+        android:textSize="40sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivDetailsUserImage"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/phone"
+        android:textColor="@color/munsell_blue"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsUserName" />
+
+    <TextView
+        android:id="@+id/tvPhoneNr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text=""
+        android:textColor="@color/munsell_blue"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsUserName" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text=""
+        android:textColor="@color/munsell_blue"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvPhoneNr"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNr" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/email_"
+        android:textColor="@color/munsell_blue"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/booking_status"
+        android:textColor="@color/munsell_blue"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tvBookingStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/booked"
+        android:textColor="@color/munsell_blue"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <ImageButton
+        android:id="@+id/ibMyProfileConfirm"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="#00121E26"
+        android:contentDescription="@string/check"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/checked"
+        app:layout_constraintEnd_toStartOf="@+id/ibMyProfileDecline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/ibCallCustomer"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="#00121E26"
+        android:contentDescription="@string/check"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/phone_call"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNr"
+        app:layout_constraintStart_toEndOf="@+id/tvPhoneNr"
+        app:layout_constraintTop_toTopOf="@+id/tvPhoneNr"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/ibMyProfileDecline"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="#00121E26"
+        android:contentDescription="@string/check"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/decline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ibMyProfileConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/confirm"
+        android:textColor="@color/munsell_blue"
+        app:layout_constraintEnd_toEndOf="@+id/ibMyProfileConfirm"
+        app:layout_constraintStart_toStartOf="@+id/ibMyProfileConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/ibMyProfileConfirm" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/decline"
+        android:textColor="@color/munsell_blue"
+        app:layout_constraintEnd_toEndOf="@+id/ibMyProfileDecline"
+        app:layout_constraintStart_toStartOf="@+id/ibMyProfileDecline"
+        app:layout_constraintTop_toBottomOf="@+id/ibMyProfileDecline" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCompleteBooking"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button2_selector"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="@string/complete"
+        android:textAllCaps="false"
+        android:textColor="@color/rich_black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:ignore="TouchTargetSizeCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

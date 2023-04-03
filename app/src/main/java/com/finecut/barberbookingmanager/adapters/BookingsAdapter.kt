@@ -1,18 +1,25 @@
 package com.finecut.barberbookingmanager.adapters
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.finecut.barberbookingmanager.BookingDetailsActivity
 import com.finecut.barberbookingmanager.R
 import com.finecut.barberbookingmanager.databinding.BookingsCardBinding
 import com.finecut.barberbookingmanager.models.Bookings
 import com.finecut.barberbookingmanager.models.Users
 import com.finecut.barberbookingmanager.utils.FirebaseData
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,6 +28,9 @@ import kotlin.collections.ArrayList
 class BookingsAdapter(private var context: Context,
     private var bookingsList: ArrayList<Bookings>)
     : RecyclerView.Adapter<BookingsAdapter.BookingsViewHolder>() {
+
+    private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private lateinit var currentUser: Users
 
     inner class BookingsViewHolder(val adapterBinding: BookingsCardBinding)
         : RecyclerView.ViewHolder(adapterBinding.root)
@@ -33,10 +43,23 @@ class BookingsAdapter(private var context: Context,
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookingsViewHolder, position: Int) {
 
+        val booking = bookingsList[holder.adapterPosition]
+
+        val bookingDate = "${booking.date}-${booking.timeslot.replace(":", "-")}"
+
+        val userBookingRef: DatabaseReference = firebaseDatabase.getReference("Users")
+            .child(bookingsList[holder.adapterPosition].userId)
+            .child("Bookings").child(bookingDate)
+
+        val barberBookingRef: DatabaseReference = firebaseDatabase.getReference("Barbers")
+            .child(bookingsList[holder.adapterPosition].barberId)
+            .child("Bookings").child(bookingDate)
+
         FirebaseData.DBHelper.getCurrentUserFromDatabase(bookingsList[holder.adapterPosition].userId,
             object : FirebaseData.DBHelper.CurrentUserCallback{
                 @SuppressLint("SetTextI18n")
                 override fun onSuccess(currentUser: Users) {
+                    this@BookingsAdapter.currentUser = currentUser
 
                     holder.adapterBinding.tvClientName.text = "${currentUser.firstName} ${currentUser.surname}"
 
@@ -65,16 +88,67 @@ class BookingsAdapter(private var context: Context,
         holder.adapterBinding.tvBookingAmountPaid.text = bookingsList[holder.adapterPosition].totalPaid
         holder.adapterBinding.tvBookingOffer.text = bookingsList[holder.adapterPosition].offer.ifEmpty { "No Offer/Discount" }
 
+        when(bookingsList[holder.adapterPosition].bookStatus){
+
+            0 -> {
+                holder.adapterBinding.tvStatus.text = "Booked"
+            }
+            1 -> {
+                holder.adapterBinding.ibAccept.visibility = View.INVISIBLE
+                holder.adapterBinding.tvStatus.text = "Confirmed"
+                holder.adapterBinding.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.green))
+            }
+            else -> {
+                holder.adapterBinding.tvStatus.text = "Status"
+            }
+        }
+
         holder.adapterBinding.ibAccept.setOnClickListener {
 
-            val booking = bookingsList[holder.adapterPosition]
+            userBookingRef.child("bookStatus").setValue(1).addOnSuccessListener {
+                Toast.makeText(context.applicationContext,"Booking is confirmed!",Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener {
+                it.localizedMessage?.let { it1 -> Log.e("Database Error:", it1) }
+            }
+            barberBookingRef.child("bookStatus").setValue(1)
+
 
         }
 
         holder.adapterBinding.ibDecline.setOnClickListener {
 
-            val booking = bookingsList[holder.adapterPosition]
+            val alertDialogBuilder = AlertDialog.Builder(context)
+            alertDialogBuilder.setTitle("Decline Booking")
+            alertDialogBuilder.setMessage("Are you sure you want to decline this booking?")
 
+            alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+                userBookingRef.removeValue().addOnSuccessListener {
+                    Toast.makeText(
+                        context.applicationContext,
+                        "Booking declined!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }.addOnFailureListener {
+                    it.localizedMessage?.let { it2 -> Log.e("Database Error:", it2) }
+                }
+
+                barberBookingRef.removeValue()
+            }
+            alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+
+        }
+
+
+        holder.adapterBinding.llBookingsCard.setOnClickListener {
+            val intent = Intent(context, BookingDetailsActivity::class.java)
+            intent.putExtra("booking",booking)
+            intent.putExtra("currentUser",currentUser)
+            context.startActivity(intent)
         }
 
     }

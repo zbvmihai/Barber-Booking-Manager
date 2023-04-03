@@ -8,9 +8,8 @@ class FirebaseData {
     object DBHelper {
 
         private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-        val usersRef: DatabaseReference = firebaseDatabase.getReference("Users")
-        val barbersRef: DatabaseReference = firebaseDatabase.getReference("Barbers")
-        private val offersRef: DatabaseReference = firebaseDatabase.getReference("Offers")
+        private val usersRef: DatabaseReference = firebaseDatabase.getReference("Users")
+        private val barbersRef: DatabaseReference = firebaseDatabase.getReference("Barbers")
 
 
         interface CurrentUserCallback {
@@ -28,7 +27,7 @@ class FirebaseData {
                     val phoneNumber = snapshot.child("phoneNumber").getValue(String::class.java) ?: ""
                     val isClient = snapshot.child("client").getValue(Int::class.java) ?: 1
                     val image = snapshot.child("image").getValue(String::class.java) ?: ""
-                    val bookings = snapshot.child("bookings").children.mapNotNull { it.getValue(Bookings::class.java) }
+                    val bookings = snapshot.child("Bookings").children.mapNotNull { it.getValue(Bookings::class.java) }
                     val points = snapshot.child("points").getValue(Long::class.java) ?: 0
 
                     val user = Users(id, firstName, surname, email, phoneNumber, isClient, image, bookings, points)

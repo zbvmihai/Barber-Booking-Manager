@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "420977124398",
+    "firebase_url": "https://fine-cut---barber-shop-default-rtdb.firebaseio.com",
+    "project_id": "fine-cut---barber-shop",
+    "storage_bucket": "fine-cut---barber-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420977124398:android:150713f54f46cc48f42bbf",
+        "android_client_info": {
+          "package_name": "com.finecut.barberbookingmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420977124398-anm2rm84reh3f1p9002es3nv3qu621f9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.finecut.barberbookingmanager",
+            "certificate_hash": "07f696a16817d20302efa0937272040a38679c89"
+          }
+        },
+        {
+          "client_id": "420977124398-qpavlkj4tk8d39hcljb0deb40mdklk9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvOQwft4uv-zmXS37SLs8lWPRVYiUZdrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420977124398-qpavlkj4tk8d39hcljb0deb40mdklk9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420977124398:android:a18f6a0a0d9d911ff42bbf",
+        "android_client_info": {
+          "package_name": "com.finecut.barbershop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420977124398-i383i6laqosvtik8hkkjcf6ria5evb9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.finecut.barbershop",
+            "certificate_hash": "07f696a16817d20302efa0937272040a38679c89"
+          }
+        },
+        {
+          "client_id": "420977124398-qpavlkj4tk8d39hcljb0deb40mdklk9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvOQwft4uv-zmXS37SLs8lWPRVYiUZdrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420977124398-qpavlkj4tk8d39hcljb0deb40mdklk9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -65,7 +65,7 @@
     <string name="edit_password">Edit Password</string>
     <string name="save">Save</string>
     <string name="date_time">Date/Time</string>
-    <string name="service_name">Service Name</string>
+    <string name="service_name">Service Name:</string>
     <string name="amount_paid">Amount Paid:</string>
     <string name="click_a_booking_to_leave_a_review">Click a booking to leave a review!</string>
     <string name="write_a_comment">Write a comment</string>
@@ -74,4 +74,8 @@
     <string name="offer_code">Offer Code</string>
     <string name="review_description">Offer Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="log_in_into_your_barber_account">Log In Into Your Barber Account!</string>
+    <string name="upcoming_bookings">Upcoming Bookings</string>
+    <string name="discount_offer_applied">Discount/Offer Applied:</string>
+    <string name="check">Check</string>
+    <string name="barber_name_upcoming_bookings">Barber Name Upcoming Bookings</string>
 </resources>

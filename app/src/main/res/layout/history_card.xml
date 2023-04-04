@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llBookingsCard"
+    android:layout_width="360dp"
+    android:layout_height="200dp"
+    android:layout_margin="4dp"
+    android:background="@drawable/cardview_bookings_background"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:contentPadding="2dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBookingCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+
+            tools:visibility="visible">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivClientImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/barber_photo"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.RoundImageView"
+                tools:ignore="ImageContrastCheck"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tvClientName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/client_name"
+                android:textColor="@color/rich_black"
+                android:textSize="26sp"
+                app:layout_constraintStart_toEndOf="@+id/ivClientImage"
+                app:layout_constraintTop_toTopOf="@+id/ivClientImage"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/tvBookingDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/date_time"
+                android:textColor="@color/rich_black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/ivClientImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvClientName"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/tvBookingServiceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/service_name"
+                android:textColor="@color/rich_black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/ivClientImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookingDateTime"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/tvBookingAmountPaid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/amount_paid"
+                android:textColor="@color/rich_black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tvBookingServiceName"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookingServiceName"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/tvBookingOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/discount_offer_applied"
+                android:textColor="@color/rich_black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tvBookingAmountPaid"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookingAmountPaid"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/status"
+                android:textColor="@color/rich_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

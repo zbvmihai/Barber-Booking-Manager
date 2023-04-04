@@ -16,6 +16,13 @@
         android:theme="@style/Theme.BarberBookingManager"
         tools:targetApi="31">
         <activity
+            android:name=".BookingHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".BookingDetailsActivity"
             android:exported="false">
             <meta-data

@@ -91,4 +91,5 @@
     <string name="time">Time:</string>
     <string name="call">Call</string>
     <string name="decline_">Decline</string>
+    <string name="bookings_history">Bookings History</string>
 </resources>

@@ -78,4 +78,17 @@
     <string name="discount_offer_applied">Discount/Offer Applied:</string>
     <string name="check">Check</string>
     <string name="barber_name_upcoming_bookings">Barber Name Upcoming Bookings</string>
+    <string name="phone">Phone:</string>
+    <string name="email_">Email:</string>
+    <string name="booking_status">Booking Status:</string>
+    <string name="booked">Booked</string>
+    <string name="confirm">Confirm</string>
+    <string name="decline">Decline</string>
+    <string name="complete">Complete</string>
+    <string name="booking_details">Booking Details</string>
+    <string name="status">Status</string>
+    <string name="date_">Date:</string>
+    <string name="time">Time:</string>
+    <string name="call">Call</string>
+    <string name="decline_">Decline</string>
 </resources>

@@ -87,4 +87,8 @@
     <string name="complete">Complete</string>
     <string name="booking_details">Booking Details</string>
     <string name="status">Status</string>
+    <string name="date_">Date:</string>
+    <string name="time">Time:</string>
+    <string name="call">Call</string>
+    <string name="decline_">Decline</string>
 </resources>

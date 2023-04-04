@@ -140,7 +140,6 @@ class BookingsAdapter(private var context: Context,
 
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
-
         }
 
 

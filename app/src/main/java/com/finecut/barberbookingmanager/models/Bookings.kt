@@ -9,7 +9,7 @@ data class Bookings(
     val date: String = "",
     val timeslot: String = "",
     val service: String = "",
-    val bookStatus: Int = 0,
+    var bookStatus: Int = 0,
     val offer: String = "",
     val totalPaid: String = ""
 

@@ -3,6 +3,7 @@ package com.finecut.barberbookingmanager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finecut.barberbookingmanager.adapters.BookingHistoryAdapter
 import com.finecut.barberbookingmanager.databinding.ActivityBookingHistoryBinding
@@ -28,6 +29,10 @@ class BookingHistoryActivity : AppCompatActivity() {
         binding = ActivityBookingHistoryBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        setSupportActionBar(binding.tbBookingsHistory)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val currentBarberId = auth.currentUser?.uid
         val bookingsReference = firebaseDatabase.getReference("Barbers")
@@ -63,5 +68,15 @@ class BookingHistoryActivity : AppCompatActivity() {
                 Log.e("Database Error: ", error.details)
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

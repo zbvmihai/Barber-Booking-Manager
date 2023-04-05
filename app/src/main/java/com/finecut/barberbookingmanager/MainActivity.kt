@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bookingsAdapter: BookingsAdapter
 
+    private lateinit var barber: Barbers
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             object : FirebaseData.DBHelper.BarberCallback {
                 @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
                 override fun onSuccess(barber: Barbers) {
+                    this@MainActivity.barber = barber
 
                     mainBinding.BookingsTbTitle.text = "${barber.name} Upcoming Bookings"
                     mainBinding.rbBarberRating.rating = barber.rating
@@ -140,6 +143,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+        mainBinding.btnSeeReviews.setOnClickListener {
+            val intent = Intent(this, ReviewsActivity::class.java)
+            intent.putExtra("barber",barber)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

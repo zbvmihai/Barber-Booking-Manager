@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,10 @@ class BookingDetailsActivity : AppCompatActivity() {
         bindingBookingDetails = ActivityBookingDetailsBinding.inflate(layoutInflater)
         val view = bindingBookingDetails.root
         setContentView(view)
+
+        setSupportActionBar(bindingBookingDetails.tbDetails)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         booking = intent.getParcelableExtra("booking")!!
         user = intent.getParcelableExtra("currentUser")!!
@@ -137,6 +142,16 @@ class BookingDetailsActivity : AppCompatActivity() {
             }
             barberBookingRef.child("bookStatus").setValue(2)
             finish()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -1,8 +1,11 @@
 package com.finecut.barberbookingmanager
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,14 +33,18 @@ class MainActivity : AppCompatActivity() {
     private var auth = FirebaseAuth.getInstance()
     private val firebaseDatabase = FirebaseDatabase.getInstance()
 
-
     private lateinit var bookingsAdapter: BookingsAdapter
+
+    private lateinit var barber: Barbers
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mainBinding.root
         setContentView(view)
+
+        setSupportActionBar(mainBinding.tbBookings)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val currentBarberId = auth.currentUser?.uid
 
@@ -49,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             object : FirebaseData.DBHelper.BarberCallback {
                 @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
                 override fun onSuccess(barber: Barbers) {
+                    this@MainActivity.barber = barber
 
                     mainBinding.BookingsTbTitle.text = "${barber.name} Upcoming Bookings"
                     mainBinding.rbBarberRating.rating = barber.rating
@@ -135,5 +143,44 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+        mainBinding.btnSeeReviews.setOnClickListener {
+            val intent = Intent(this, ReviewsActivity::class.java)
+            intent.putExtra("barber",barber)
+            startActivity(intent)
+        }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_logout -> {
+                logOut()
+                true
+            }
+            R.id.menu_bookings_history -> {
+                navigateToBookingHistory()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun logOut() {
+            auth.signOut()
+            val intent = Intent(this, LogInActivity::class.java)
+            startActivity(intent)
+            finish()
+
+    }
+
+    private fun navigateToBookingHistory() {
+        val intent = Intent(this, BookingHistoryActivity::class.java)
+        startActivity(intent)
+    }
+
 }

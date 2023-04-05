@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llReview"
+    android:layout_width="320dp"
+    android:layout_height="160dp"
+    android:layout_margin="4dp"
+    android:background="@drawable/cardview_border"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:contentPadding="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivClientImage"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/barber_photo"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.RoundImageView"
+            tools:ignore="ImageContrastCheck"
+            tools:src="@tools:sample/avatars" />
+
+        <ProgressBar
+            android:id="@+id/pbClientImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="13dp"
+            tools:visibility="visible"
+            tools:src="@tools:sample/avatars"
+            app:layout_constraintTop_toTopOf="@+id/ivClientImage"
+            app:layout_constraintStart_toStartOf="@+id/ivClientImage"
+            app:layout_constraintEnd_toEndOf="@+id/ivClientImage"
+            app:layout_constraintTop_toBottomOf="@+id/ivClientImage"/>
+
+        <TextView
+            android:id="@+id/tvClientName"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="1dp"
+            android:textColor="@color/rich_black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivClientImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rbClientRating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/description_ratingbar_background"
+            android:numStars="5"
+            android:padding="0dp"
+            android:rating="4.5"
+            android:stepSize="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivClientImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvClientName" />
+
+        <TextView
+            android:id="@+id/tvClientDescription"
+            android:layout_width="300dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/description_card_background"
+            android:fontFamily="@font/poppins"
+            android:padding="5dp"
+            android:textColor="@color/rich_black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivClientImage"
+            tools:ignore="TextContrastCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

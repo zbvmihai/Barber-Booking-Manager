@@ -24,7 +24,9 @@
             android:fontFamily="@font/poppins_bold"
             android:text="@string/bookings_history"
             android:textColor="@color/rich_black"
-            android:textSize="32sp" />
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="67dp"
+            tools:layout_editor_absoluteY="4dp" />
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -1,13 +1,22 @@
 package com.finecut.barberbookingmanager
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finecut.barberbookingmanager.adapters.BookingsAdapter
 import com.finecut.barberbookingmanager.databinding.ActivityMainBinding
@@ -19,6 +28,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.text.ParseException
@@ -42,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mainBinding.root
         setContentView(view)
+
+        requestNotificationPermission()
 
         setSupportActionBar(mainBinding.tbBookings)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -181,6 +193,43 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToBookingHistory() {
         val intent = Intent(this, BookingHistoryActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun setUpNotification() {
+        val channelId = "default_channel"
+        val channelName = "Default Channel"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, channelName, importance)
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        // Subscribe to a topic (optional)
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+            } else {
+                setUpNotification()
+            }
+        } else {
+            setUpNotification()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setUpNotification()
+            } else {
+                Toast.makeText(applicationContext, "Permission denied. Notifications won't be enabled.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

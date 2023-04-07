@@ -24,7 +24,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="@string/barber_name_reviews"
             android:textColor="@color/rich_black"
-            android:textSize="30sp" />
+            android:textSize="12sp" />
 
     </androidx.appcompat.widget.Toolbar>
 

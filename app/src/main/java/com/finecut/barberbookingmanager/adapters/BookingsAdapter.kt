@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+// This bookings adapter class take a list of bookings and populate the views of the bookings card
+// in the recycler view of the My Bookings Activity.
 class BookingsAdapter(private var context: Context,
     private var bookingsList: ArrayList<Bookings>)
     : RecyclerView.Adapter<BookingsAdapter.BookingsViewHolder>() {
@@ -55,6 +57,8 @@ class BookingsAdapter(private var context: Context,
             .child(bookingsList[holder.adapterPosition].barberId)
             .child("Bookings").child(bookingDate)
 
+        // This block of code retrieve the authenticated barber from the database
+        // and populate the views Main activity.
         FirebaseData.DBHelper.getCurrentUserFromDatabase(bookingsList[holder.adapterPosition].userId,
             object : FirebaseData.DBHelper.CurrentUserCallback{
                 @SuppressLint("SetTextI18n")
@@ -74,6 +78,7 @@ class BookingsAdapter(private var context: Context,
                 }
             })
 
+        // Next lines of code populate the booking card with the booking data passed to the adapter
         val storedDate = bookingsList[holder.adapterPosition].date
         val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         if (storedDate == currentDate) {
@@ -88,6 +93,7 @@ class BookingsAdapter(private var context: Context,
         holder.adapterBinding.tvBookingAmountPaid.text = bookingsList[holder.adapterPosition].totalPaid
         holder.adapterBinding.tvBookingOffer.text = bookingsList[holder.adapterPosition].offer.ifEmpty { "No Offer/Discount" }
 
+        // Next lines of code display the bookings status view based on booking status
         when(bookingsList[holder.adapterPosition].bookStatus){
 
             0 -> {
@@ -103,6 +109,7 @@ class BookingsAdapter(private var context: Context,
             }
         }
 
+        // If the accept button is clicked, the booking status will change accordingly
         holder.adapterBinding.ibAccept.setOnClickListener {
 
             userBookingRef.child("bookStatus").setValue(1).addOnSuccessListener {
@@ -111,10 +118,10 @@ class BookingsAdapter(private var context: Context,
                 it.localizedMessage?.let { it1 -> Log.e("Database Error:", it1) }
             }
             barberBookingRef.child("bookStatus").setValue(1)
-
-
         }
 
+        // If the decline button is clicked, an alert dialog will pop out and
+        // if the barber click the yes button, the booking will be deleted from database.
         holder.adapterBinding.ibDecline.setOnClickListener {
 
             val alertDialogBuilder = AlertDialog.Builder(context)
@@ -142,14 +149,12 @@ class BookingsAdapter(private var context: Context,
             alertDialog.show()
         }
 
-
         holder.adapterBinding.llBookingsCard.setOnClickListener {
             val intent = Intent(context, BookingDetailsActivity::class.java)
             intent.putExtra("booking",booking)
             intent.putExtra("currentUser",currentUser)
             context.startActivity(intent)
         }
-
     }
 
     override fun getItemCount(): Int {

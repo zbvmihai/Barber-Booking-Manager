@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
+// This Booking History adapter class take a list of bookings and populate the views of the bookings card
+// in the recycler view of the Bookings History activity.
 class BookingHistoryAdapter(
     private val context: Context,
     private val bookingsList: ArrayList<Bookings>
@@ -52,6 +54,7 @@ class BookingHistoryAdapter(
        holder.adapterBinding.tvBookingAmountPaid.text = booking.totalPaid
        holder.adapterBinding.tvBookingOffer.text = booking.offer
 
+        //This block of code update the bookings status view based on booking status.
         when(booking.bookStatus){
 
             0 -> {holder.adapterBinding.tvStatus.text = "Booked"}

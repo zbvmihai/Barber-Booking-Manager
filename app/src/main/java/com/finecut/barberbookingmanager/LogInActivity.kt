@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseError
 class LogInActivity : AppCompatActivity() {
 
     private lateinit var bindingLogin : ActivityLogInBinding
-
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +35,9 @@ class LogInActivity : AppCompatActivity() {
         }
     }
 
+    // This overridden function check if the user is already signed in when the app opens,
+    // if the user is signed in it will be redirected to Main Activity,
+    // if is not, it will be redirected to the Sign In activity.
     override fun onStart() {
         super.onStart()
 
@@ -48,7 +50,8 @@ class LogInActivity : AppCompatActivity() {
             finish()
         }
     }
-
+    // This function check the user email and password and if they are correct,
+    // the user will be signed in and will be redirected to the main activity.
     private fun signIn(userEmail: String, userPassword: String) {
         auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -86,6 +89,7 @@ class LogInActivity : AppCompatActivity() {
     }
 
 
+    // This function check if the user filled the text fields with data.
     private fun validateForm(email: String, password: String): Boolean {
 
         return when {

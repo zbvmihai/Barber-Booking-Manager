@@ -34,6 +34,9 @@ class BookingHistoryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        // Next lines of code listen to the database and update the booking list everytime the data
+        // is changed in the database. The booking list is passed to the booking history adapter
+        // to update the recycler view with the bookings in the Booking History Activity
         val currentBarberId = auth.currentUser?.uid
         val bookingsReference = firebaseDatabase.getReference("Barbers")
             .child(currentBarberId!!).child("Bookings")
@@ -70,6 +73,8 @@ class BookingHistoryActivity : AppCompatActivity() {
         })
     }
 
+    // This overridden function make the back button to finish current activity
+    // and go back to the previous one.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

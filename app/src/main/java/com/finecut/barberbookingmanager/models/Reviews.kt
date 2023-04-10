@@ -3,6 +3,7 @@ package com.finecut.barberbookingmanager.models
 import android.os.Parcel
 import android.os.Parcelable
 
+// This is the data class model for the Reviews object.
 data class Reviews(
     val userId: String = "",
     val rating: Float = 0F,

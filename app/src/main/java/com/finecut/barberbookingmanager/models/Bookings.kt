@@ -3,6 +3,7 @@ package com.finecut.barberbookingmanager.models
 import android.os.Parcel
 import android.os.Parcelable
 
+// This is the data class model for the Bookings object.
 data class Bookings(
     val userId: String = "",
     val barberId: String = "",

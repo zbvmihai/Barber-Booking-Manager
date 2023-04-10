@@ -39,6 +39,9 @@ class BookingDetailsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        // Next lines of code retrieves the booking and user object passed from the main activity
+        // based on selected booking from the recycler view
+        // and populate the views of the Booking Details Activity
         booking = intent.getParcelableExtra("booking")!!
         user = intent.getParcelableExtra("currentUser")!!
 
@@ -82,6 +85,7 @@ class BookingDetailsActivity : AppCompatActivity() {
                 }
             })
 
+        // If the Confirm button is clicked the booking status will change to 1
         bindingBookingDetails.ibMyProfileConfirm.setOnClickListener {
 
 
@@ -96,6 +100,8 @@ class BookingDetailsActivity : AppCompatActivity() {
             bindingBookingDetails.tvConfirmText.visibility = View.GONE
         }
 
+        // If the Decline button is clicked a warning will pop out, if the yes button is clicked,
+        // the booking will be deleted from the database.
         bindingBookingDetails.ibMyProfileDecline.setOnClickListener {
 
             val alertDialogBuilder = AlertDialog.Builder(this)
@@ -124,6 +130,8 @@ class BookingDetailsActivity : AppCompatActivity() {
             alertDialog.show()
         }
 
+        // When the Call Customer button is clicked the calling application of the phone will open
+        // and the user phone number will be filled automaticaly in the app.
         bindingBookingDetails.ibCallCustomer.setOnClickListener {
 
             val phoneNumber = user.phoneNumber
@@ -133,6 +141,7 @@ class BookingDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //If the complete button is clicked, the booking status will be updated to 2 in database.
         bindingBookingDetails.btnComplete.setOnClickListener {
 
             userBookingRef.child("bookStatus").setValue(2).addOnSuccessListener {
@@ -145,6 +154,8 @@ class BookingDetailsActivity : AppCompatActivity() {
         }
     }
 
+    // This overridden function make the back button to finish current activity
+    // and go back to the previous one.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

@@ -3,6 +3,9 @@ package com.finecut.barberbookingmanager.utils
 import com.finecut.barberbookingmanager.models.*
 import com.google.firebase.database.*
 
+// This  class can be used in any activity withing this project.
+// it contains the all functions that deal with the firebase database,
+// and has the purpose to maintain a clean code architecture.
 class FirebaseData {
 
     object DBHelper {
@@ -11,12 +14,12 @@ class FirebaseData {
         private val usersRef: DatabaseReference = firebaseDatabase.getReference("Users")
         private val barbersRef: DatabaseReference = firebaseDatabase.getReference("Barbers")
 
-
         interface CurrentUserCallback {
             fun onSuccess(currentUser: Users)
             fun onFailure(error: DatabaseError)
         }
 
+        // This function retrieve an user from the database under Users node based on user id
         fun getCurrentUserFromDatabase(userId: String, callback: CurrentUserCallback) {
             usersRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -50,6 +53,7 @@ class FirebaseData {
             fun onFailure(error: DatabaseError)
         }
 
+        // This function retrieve a barber from the database under Barbers node based on barber id
         fun getBarberFromDatabase(barberId: String, callback: BarberCallback) {
             barbersRef.child(barberId).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -73,7 +77,6 @@ class FirebaseData {
                 }
             })
         }
-
     }
 }
 

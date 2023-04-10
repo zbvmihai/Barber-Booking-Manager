@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseError
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
+// This reviews adapter class take a list of reviews and populate the views of the reviews card
+// in the recycler view of the Reviews Activity.
 class ReviewsAdapter(private var context: Context,
 private var reviewsList: ArrayList<Reviews>)
     :RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder>(){
@@ -30,6 +32,8 @@ private var reviewsList: ArrayList<Reviews>)
 
     override fun onBindViewHolder(holder: ReviewsViewHolder, position: Int) {
 
+        // This block of code retrieve the authenticated barber data from the database
+        // and update the views in the Reviews class
         FirebaseData.DBHelper.getCurrentUserFromDatabase(reviewsList[holder.adapterPosition].userId, object : FirebaseData.DBHelper.CurrentUserCallback {
             @SuppressLint("SetTextI18n")
             override fun onSuccess(currentUser: Users) {

@@ -33,6 +33,8 @@ class ReviewsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        // Next lines of code take the barber object passed from main activity
+        // and populate the views of the Reviews activity
         barber = intent.getParcelableExtra("barber")!!
 
         binding.reviewsTbTitle.text = barber.name
@@ -61,6 +63,8 @@ class ReviewsActivity : AppCompatActivity() {
         binding.rvReviews.adapter = reviewsAdapter
     }
 
+    // This overridden function make the back button to finish current activity
+    // and go back to the previous one.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
